@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.ex.MemberMapper">
+
+	<!-- 회원목록 -->
+	<select id="MemberList" resultType="MemberVO">
+		SELECT * FROM t_sbp_member
+	</select>
+	
+	<!-- 회원 로그인 -->
+	<select id="MemberLogin" resultType="MemberVO">
+		SELECT * FROM t_sbp_member WHERE m_userId = #{m_userId} AND m_pw = #{m_pw}
+	</select>
+	
+</mapper>
