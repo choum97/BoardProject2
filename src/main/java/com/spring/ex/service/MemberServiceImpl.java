@@ -1,8 +1,10 @@
 package com.spring.ex.service;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
 
@@ -24,5 +26,15 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberVO Login(MemberVO vo) throws Exception {
 		return dao.Login(vo);
+	}
+	
+	//회원 로그아웃
+	@Override
+	public void logout(HttpServletResponse response) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		out.println("<script>location.href='home';</script>");
+		out.close();
 	}
 }
