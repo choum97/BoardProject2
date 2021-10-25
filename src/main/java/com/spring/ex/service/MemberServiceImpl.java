@@ -47,7 +47,6 @@ public class MemberServiceImpl implements MemberService {
 	//회원가입 시 아이디 중복확인
 	@Override
 	public MemberVO IDCheck(MemberVO vo) throws Exception {
-		// TODO Auto-generated method stub
 		return dao.IDCheck(vo);
 	}
 	

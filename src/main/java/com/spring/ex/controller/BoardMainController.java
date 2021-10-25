@@ -1,5 +1,6 @@
 package com.spring.ex.controller;
 
+import java.io.PrintWriter;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -31,8 +32,6 @@ public class BoardMainController {
 	//로그인 페이지 이동
 	@RequestMapping(value = "/loginView", method = RequestMethod.GET)
 	public String LoginView(Model model) throws Exception {
-		//System.out.println(service.MemberList());
-		System.out.println(service.MemberList());
 		return "login";
 	}
 	
@@ -66,14 +65,39 @@ public class BoardMainController {
 	//회원가입 페이지 이동
 	@RequestMapping(value = "/SignUpMemberView", method = RequestMethod.GET)
 	public String SignUpMemberView(Model model) throws Exception {
-		
 		return "join";
 	}
 	
 	//회원가입
-	@RequestMapping(value = "/SignUpMember", method = RequestMethod.GET)
-	public String SignUpMember(Model model) throws Exception {
+	@RequestMapping(value = "/SignUpMember", method = RequestMethod.POST)
+	public void SignUpMember(MemberVO vo, Model model, HttpServletRequest request,  HttpServletResponse response) throws Exception {
+		int result = service.SignUp(vo);
+		HttpSession session = request.getSession();
 		
-		return "home";
+		if (result == 1) {
+			//session.setAttribute("member", vo);
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('회원가입 되었습니다.');");
+			out.println("location.href='home';");
+			out.println("</script>");
+			out.close();
+		}
+	}
+	
+	//회원가입 아이디 중복확인
+	@RequestMapping(value = "/IDCheck", method = RequestMethod.POST)
+	public @ResponseBody int IDCheck(MemberVO vo) throws Exception {
+		
+		int result = 0;
+		
+		MemberVO IDCheck = service.IDCheck(vo);
+		System.out.println(IDCheck);
+		if (IDCheck == null) {
+			result = 1;
+		}
+		
+		return result;
 	}
 }
