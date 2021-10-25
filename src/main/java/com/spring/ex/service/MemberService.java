@@ -19,4 +19,13 @@ public interface MemberService {
 	
 	//회원 로그아웃
 	public void logout(HttpServletResponse response) throws Exception;
+	
+	//회원가입
+	public int SignUp(MemberVO vo) throws Exception;
+	
+	//회원가입 시 아이디 중복확인
+	public MemberVO IDCheck(MemberVO vo) throws Exception;
+	
+	//회원 로그인 시 lastDate 갱신
+	public int LoginDateRenewal(MemberVO vo) throws Exception;
 }

@@ -13,4 +13,30 @@
 		SELECT * FROM t_sbp_member WHERE m_userId = #{m_userId} AND m_pw = #{m_pw}
 	</select>
 	
+	<!-- 회원가입 -->
+	<insert id="MemberSignUp">
+		INSERT INTO t_sbp_member(
+			m_name,
+			m_userId,
+			m_pw,
+			m_email,
+			m_access_right)
+		VALUES(
+			#{m_name},
+			#{m_userId},
+			#{m_pw},
+			#{m_email},
+			0,)
+    </insert>
+    
+    <!-- 회원가입 시 아이디 중복확인 -->
+    <select id="IDCheck" resultType="MemberVO">
+    	SELECT * FROM t_sbp_member WHERE m_userId = #{m_userId}
+    </select>
+    	
+    <!-- 로그인 시 lastDate 갱신 -->
+    <update id="MemberLoginDateLog">
+    	UPDATE t_sbp_member SET m_last_date = curdate() WHERE m_userId = #{m_userId}
+    </update>
+	
 </mapper>

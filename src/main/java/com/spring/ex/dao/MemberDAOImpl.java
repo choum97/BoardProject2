@@ -27,4 +27,22 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberVO Login(MemberVO vo) throws Exception {
 		return sqlSession.selectOne(namespace + ".MemberLogin", vo);
 	}
+	
+	//회원가입
+	@Override
+	public int SignUp(MemberVO vo) throws Exception {
+		return sqlSession.insert(namespace + ".MemberSignUp", vo);
+	}
+	
+	//회원가입 시 아이디 중복확인
+	@Override
+	public MemberVO IDCheck(MemberVO vo) throws Exception {
+		return sqlSession.selectOne(namespace + ".IDCheck", vo);
+	}
+	
+	//회원 로그인 시 lastDate 갱신
+	@Override
+	public int LoginDateRenewal(MemberVO vo) throws Exception {
+		return sqlSession.update(namespace + ".MemberLoginDateLog", vo);
+	}
 }

@@ -12,7 +12,7 @@
 
 	<c:if test="${member == null}">
 		<a href="loginView">로그인</a> <br>
-		<a href="joinView">회원가입</a><br>
+		<a href="SignUpMemberView">회원가입</a><br>
 		<a href="#">게시판</a>
 	</c:if>
 	<c:if test="${member != null}">

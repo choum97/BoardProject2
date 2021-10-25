@@ -48,8 +48,8 @@ public class BoardMainController {
 		MemberVO member = service.Login(vo);
 		
 		if (member != null) {
-			System.out.println("성공");
 			session.setAttribute("member", member);
+			service.LoginDateRenewal(vo);
 			result = 1;
 		}
 		return result;
@@ -63,9 +63,17 @@ public class BoardMainController {
 		service.logout(response);
 	}
 	
-	@RequestMapping(value = "/joinView", method = RequestMethod.GET)
-	public String JoinView(Model model) throws Exception {
+	//회원가입 페이지 이동
+	@RequestMapping(value = "/SignUpMemberView", method = RequestMethod.GET)
+	public String SignUpMemberView(Model model) throws Exception {
 		
 		return "join";
+	}
+	
+	//회원가입
+	@RequestMapping(value = "/SignUpMember", method = RequestMethod.GET)
+	public String SignUpMember(Model model) throws Exception {
+		
+		return "home";
 	}
 }
