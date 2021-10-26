@@ -36,8 +36,8 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	//회원가입 시 아이디 중복확인
 	@Override
-	public MemberVO IDCheck(MemberVO vo) throws Exception {
-		return sqlSession.selectOne(namespace + ".IDCheck", vo);
+	public MemberVO IDCheck(String checkId) throws Exception {
+		return sqlSession.selectOne(namespace + ".IDCheck", checkId);
 	}
 	
 	//회원 로그인 시 lastDate 갱신

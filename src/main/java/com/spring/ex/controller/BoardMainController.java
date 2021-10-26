@@ -87,17 +87,16 @@ public class BoardMainController {
 	}
 	
 	//회원가입 아이디 중복확인
+	@ResponseBody
 	@RequestMapping(value = "/IDCheck", method = RequestMethod.POST)
-	public @ResponseBody int IDCheck(MemberVO vo) throws Exception {
-		
+	public int IDCheck(String m_userId) throws Exception {
 		int result = 0;
 		
-		MemberVO IDCheck = service.IDCheck(vo);
-		System.out.println(IDCheck);
+		MemberVO IDCheck = service.IDCheck(m_userId);
 		if (IDCheck == null) {
 			result = 1;
 		}
-		
 		return result;
 	}
+	
 }
