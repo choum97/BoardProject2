@@ -12,7 +12,7 @@
 	
 
 	<form method="post">
-		<input type="text" name="m_userId" id="m_userId" placeholder="아이디" />
+		<input type="text" name="m_userId" id="m_userId" placeholder="아이디" /><br>
 		<input type="password" name="m_pw" id="m_pw" placeholder="비밀번호" />
 		<input type="button" value="로그인"  id="submitBtn">
 	</form>

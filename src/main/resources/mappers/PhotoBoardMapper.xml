@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.ex.PhotoBoardMapper">
+
+	<!-- 게시글 작성  -->
+	<insert id="PhotoBoardWrite" parameterType="hashMap">
+		INSERT INTO t_sbp_board(
+			b_userId, 
+			b_title, 
+			b_content,
+			b_hit, 
+			b_good, 
+			b_bad,
+			b_file_name)
+	    VALUES (
+			#{b_userId},
+		    #{b_title},
+		    #{b_content}, 
+		    #{b_hit}, 
+		    #{b_good},
+		    #{b_bad}, 
+		    #{b_file_name})
+	</insert>
+	
+	<!-- 게시글 수정 -->
+    <update id="PhotoBoardModify" parameterType="PhotoBoardVO">
+    	UPDATE t_sbp_board SET Title=#{title}, content=#{content}, s_file_name = #{s_file_name} WHERE prid = #{prid}
+    </update>
+    
+   	<!-- 게시글 삭제  -->
+	<delete id="PhotoBoardDelete" parameterType="int">
+		DELETE FROM t_sbp_board WHERE b_no = #{b_no}
+	</delete>
+	
+	<!-- 게시판 출력 출력 -->
+	<select id="PhotoBoardList" resultType="PhotoBoardVO">
+		SELECT * FROM t_sbp_board order BY b_no DESC LIMIT #{Page},#{PageSize}
+	</select>
+	
+	<!-- 게시판 조회  -->
+	<select id="PhotoBoardView" parameterType="int" resultType="PhotoBoardVO">
+		SELECT * FROM t_sbp_board WHERE b_no = #{b_no}
+	</select>
+	
+	<!-- 게시글 조회수 증가  - 페이징 -->
+    <update id="PhotoBoardBoardHit" parameterType="int">
+    	UPDATE t_sbp_board SET b_hit = b_hit+1 WHERE b_no = #{b_no}
+    </update>
+	
+	<!-- 게시글 총 갯수 -->
+	<select id="getPhotoBoardTotalCount" resultType="int">
+		SELECT COUNT(*) FROM t_sbp_board
+	</select>
+</mapper>

@@ -1,15 +1,14 @@
-package com.spring.ex.dao;
+package com.spring.ex.service;
 
 import java.util.HashMap;
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.spring.ex.vo.PhotoBoardVO;
 
-@Repository
-public interface PhotoBoardDAO {
-	
+@Service
+public interface PhotoBoardService {
 	//게시글 작성
 	public int PhotoBoardWrite(PhotoBoardVO vo) throws Exception;
 	
@@ -30,5 +29,4 @@ public interface PhotoBoardDAO {
 	
 	//게시글 총 갯수 - 페이징
 	public int PhotoBoardTotalCount() throws Exception;
-	
 }
