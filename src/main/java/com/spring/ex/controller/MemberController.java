@@ -38,7 +38,6 @@ public class MemberController {
 			result = 1;
 		}
 		return result;
-
 	}
 	
 	//로그아웃
