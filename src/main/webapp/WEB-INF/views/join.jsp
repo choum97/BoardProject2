@@ -20,6 +20,7 @@
 				<td>
 					<input type="text" name="m_name" id="m_name" placeholder="이름" />
 				</td>
+				
 			</tr>
 			<tr>
 				<td>
