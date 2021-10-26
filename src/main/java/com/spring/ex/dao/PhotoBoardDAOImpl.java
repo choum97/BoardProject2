@@ -57,7 +57,7 @@ public class PhotoBoardDAOImpl implements PhotoBoardDAO {
 	//게시글 총 갯수 - 페이징
 	@Override
 	public int PhotoBoardTotalCount() throws Exception {
-		return sqlSession.selectOne(namespace + ".PhotoBoardTotalCount");
+		return sqlSession.selectOne(namespace + ".getPhotoBoardTotalCount");
 	}
 	
 }
