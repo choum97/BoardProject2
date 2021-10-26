@@ -22,7 +22,7 @@ public class PhotoBoardVO {
 	private int b_hit;
 	private int b_good;
 	private int b_bad;
-	private String file_name;
+	private String b_file_name;
 	private Date b_writing_date;
 	
 	public int getB_no() {
@@ -67,16 +67,16 @@ public class PhotoBoardVO {
 	public void setB_bad(int b_bad) {
 		this.b_bad = b_bad;
 	}
-	public String getFile_name() {
-		return file_name;
-	}
-	public void setFile_name(String file_name) {
-		this.file_name = file_name;
-	}
 	public Date getB_writing_date() {
 		return b_writing_date;
 	}
 	public void setB_writing_date(Date b_writing_date) {
 		this.b_writing_date = b_writing_date;
+	}
+	public String getB_file_name() {
+		return b_file_name;
+	}
+	public void setB_file_name(String b_file_name) {
+		this.b_file_name = b_file_name;
 	}
 }

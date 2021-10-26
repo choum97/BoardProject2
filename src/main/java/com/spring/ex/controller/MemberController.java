@@ -1,6 +1,7 @@
 package com.spring.ex.controller;
 
 import java.io.PrintWriter;
+import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,24 @@ import com.spring.ex.vo.MemberVO;
 public class MemberController {
 	@Inject
 	private MemberService service;
+	
+	//메인 페이지 이동
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public String home(Locale locale, Model model) {
+		return "home";
+	}
+	
+	//로그인 페이지 이동
+	@RequestMapping(value = "/loginView", method = RequestMethod.GET)
+	public String LoginView(Model model) throws Exception {
+		return "login";
+	}
+	
+	//회원가입 페이지 이동
+	@RequestMapping(value = "/SignUpMemberView", method = RequestMethod.GET)
+	public String SignUpMemberView(Model model) throws Exception {
+		return "join";
+	}
 	
 	//로그인 실행
 	@RequestMapping(value = "/login", method = RequestMethod.POST)

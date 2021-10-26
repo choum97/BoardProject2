@@ -30,7 +30,7 @@ public class PhotoBoardController {
 		
 		PagingVO paging = new PagingVO();
 		paging.setPageNo(page);
-		paging.setPageSize(10);
+		paging.setPageSize(9);
 		paging.setTotalCount(totalCount);
 		page = (page - 1) * 10;
 		
@@ -41,7 +41,7 @@ public class PhotoBoardController {
 		
 		List<PhotoBoardVO> photoBoardList = service.PhotoBoardList(map);
 		System.out.println(photoBoardList);
-		model.addAttribute("plist", photoBoardList);
+		model.addAttribute("photoBoardList", photoBoardList);
 		model.addAttribute("Paging", paging);
 		
 		return "photoBoard";
