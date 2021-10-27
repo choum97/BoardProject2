@@ -30,14 +30,20 @@ public class PhotoBoardServiceImpl implements PhotoBoardService {
 		return dao.PhotoBoardDelete(b_no);
 	}
 	
+	//게시글 이미지 파일이름 검색 - 파일 삭제하려고 사용
+	@Override
+	public String PhotoBoardFileName(int b_no) throws Exception {
+		return dao.PhotoBoardFileName(b_no);
+	}
+	
 	//게시글 출력
 	public List<PhotoBoardVO> PhotoBoardList(HashMap<String, Integer> map) throws Exception {
 		return dao.PhotoBoardList(map);
 	}
 	
 	//게시글 조회
-	public PhotoBoardVO PhotoBoardView(int b_no) throws Exception {
-		return dao.PhotoBoardView(b_no);
+	public PhotoBoardVO PhotoBoardDetailView(int b_no) throws Exception {
+		return dao.PhotoBoardDetailView(b_no);
 	}
 	
 	//게시글 조회수 증가

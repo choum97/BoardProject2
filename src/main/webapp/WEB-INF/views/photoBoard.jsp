@@ -11,11 +11,15 @@
 </head>
 
 <body>
-	<a href="home">메인</a>&emsp;
+	<h1>
+		게시판 목록 
+	</h1>
+	<a href="home">메인</a>
  	<c:if test="${member != null}">
-		<a href="#">게시글작성</a> 
+		/ <a href="#">게시글작성</a> 
+		/ <a href="logout">로그아웃</a>
 	</c:if> 
-	
+	<hr>
     <div class="container" align="center">
 		<div id="content">
 			<div class="container">
@@ -23,17 +27,18 @@
 				<div class="col-lg-4 col-md-6">
 					<div>
 						<c:choose>
-							<c:when test="${photoBoardList.b_file_name eq null}">
-								<img src='<c:url value="/resources/images/noImage.png"/>' width="300" height="200">
+							<c:when test="${photoBoardList.b_file_name ne null}">
+								<img src='<c:url value="/resources/images/photoBoard/${photoBoardList.b_file_name}"/>' alt="" width="300" height="200">
 							</c:when>
 							<c:otherwise>
-								<img src='<c:url value="/resources/images/PhotoBoard/${photoBoardList.b_file_name}"/>' alt="" width="300" height="200">
+								<img src='<c:url value="/resources/images/noImage.png"/>' width="300" height="200">
 							</c:otherwise>
 						</c:choose>
 					</div>
 					<div>
+						<p align="right"><font size="1px"> 조회수 : ${photoBoardList.b_hit}</font></p>
 						<h3 style="font-size: 19px;">
-							<a href="?b_no=${photoBoardList.b_no}"><c:out value="${fn:substring(photoBoardList.b_title, 0 ,20)}" /></a>
+							<a href="PhotoBoardDetailView?b_no=${photoBoardList.b_no}"><c:out value="${fn:substring(photoBoardList.b_title, 0 ,20)}" /></a>
 						</h3>
 						<p><c:out value="${fn:substring(photoBoardList.b_content,0,20)}" /></p>
 						<ul class="tour-one__meta list-unstyled">
@@ -52,12 +57,12 @@
 				<c:choose>
 					<c:when test="${Paging.pageNo eq Paging.firstPageNo }">
 						<li class="page-item disabled">
-							<a class="page-link" href="PhotoBoardView?page=${Paging.prevPageNo }">Previus</a>
+							<a class="page-link" href="PhotoBoardListView?page=${Paging.prevPageNo }">Previus</a>
 						</li>
 					</c:when>
 					<c:otherwise>
 						<li class="page-item">
-							<a class="page-link" href="PhotoBoardView?page=${Paging.prevPageNo }">Previus</a>
+							<a class="page-link" href="PhotoBoardListView?page=${Paging.prevPageNo }">Previus</a>
 						</li>
 					</c:otherwise>
 				</c:choose>
@@ -66,12 +71,12 @@
 					<c:choose>
 						<c:when test="${i eq Paging.pageNo }">
 							<li class="page-item disabled">
-								<a class="page-link" href="PhotoBoardView?page=${i}"><c:out value="${i}"/></a>
+								<a class="page-link" href="PhotoBoardListView?page=${i}"><c:out value="${i}"/></a>
 							</li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item">
-								<a class="page-link" href="PhotoBoardView?page=${i}"><c:out value="${i}"/></a>
+								<a class="page-link" href="PhotoBoardListView?page=${i}"><c:out value="${i}"/></a>
 							</li>
 						</c:otherwise>
 					</c:choose>
@@ -80,12 +85,12 @@
 				<c:choose>
 					<c:when test="${Paging.pageNo eq Paging.finalPageNo }">
 						<li class="page-item disabled">
-							<a class="page-link" href="PhotoBoardView?page=${Paging.nextPageNo }">Next</a>
+							<a class="page-link" href="PhotoBoardListView?page=${Paging.nextPageNo }">Next</a>
 						</li>
 					</c:when>
 					<c:otherwise>
 						<li class="page-item">
-							<a class="page-link" href="PhotoBoardView?page=${Paging.nextPageNo }">Next</a>
+							<a class="page-link" href="PhotoBoardListView?page=${Paging.nextPageNo }">Next</a>
 						</li>
 					</c:otherwise>
 				</c:choose>

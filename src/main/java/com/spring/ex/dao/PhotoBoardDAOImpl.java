@@ -35,6 +35,12 @@ public class PhotoBoardDAOImpl implements PhotoBoardDAO {
 	public int PhotoBoardDelete(int b_no) throws Exception {
 		return sqlSession.delete(namespace + ".PhotoBoardDelete", b_no);
 	}
+	
+	//게시글 이미지 파일이름 검색 - 파일 삭제하려고 사용
+	@Override
+	public String PhotoBoardFileName(int b_no) throws Exception {
+		return sqlSession.selectOne(namespace + ".PhotoBoardFileName", b_no);
+	}
 
 	//게시글 출력
 	@Override
@@ -44,7 +50,7 @@ public class PhotoBoardDAOImpl implements PhotoBoardDAO {
 
 	//게시글 조회
 	@Override
-	public PhotoBoardVO PhotoBoardView(int b_no) throws Exception {
+	public PhotoBoardVO PhotoBoardDetailView(int b_no) throws Exception {
 		return sqlSession.selectOne(namespace + ".PhotoBoardView", b_no);
 	}
 
@@ -59,5 +65,5 @@ public class PhotoBoardDAOImpl implements PhotoBoardDAO {
 	public int PhotoBoardTotalCount() throws Exception {
 		return sqlSession.selectOne(namespace + ".getPhotoBoardTotalCount");
 	}
-	
+
 }

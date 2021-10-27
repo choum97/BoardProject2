@@ -16,9 +16,9 @@
 	<!-- MySQL DataSource -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.mariadb.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mariadb://127.0.0.1:3307/sbp?characterEncoding=utf8"></property>
+		<property name="url" value="jdbc:mariadb://127.0.0.1:3306/sbp?characterEncoding=utf8"></property>
 		<property name="username" value="root"></property>
-		<property name="password" value="123456"></property>
+		<property name="password" value="1234"></property>
 	</bean>
 	
 	<!-- MyBatis SqlSessionFactoryBean -->
@@ -37,6 +37,12 @@
     	<property name="dataSource" ref="dataSource"></property>
 	</bean>
 
+	<!-- MultipartResolver 설정 --> 
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
+		<property name="maxUploadSize" value="100000000" /> 
+		<property name="maxInMemorySize" value="100000000" /> 
+	</bean>
+	
     <tx:annotation-driven transaction-manager="transactionManager" />
 	
 	<context:component-scan base-package="com.spring.ex.util"></context:component-scan>

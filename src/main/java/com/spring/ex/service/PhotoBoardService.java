@@ -18,11 +18,14 @@ public interface PhotoBoardService {
 	//게시글 삭제
 	public int PhotoBoardDelete(int b_no) throws Exception;
 	
+	//게시글 이미지 파일이름 검색 - 파일 삭제하려고 사용
+	public String PhotoBoardFileName(int b_no) throws Exception;
+	
 	//게시글 출력
 	public List<PhotoBoardVO> PhotoBoardList(HashMap<String, Integer> map) throws Exception;
 	
 	//게시글 조회
-	public PhotoBoardVO PhotoBoardView(int b_no) throws Exception;
+	public PhotoBoardVO PhotoBoardDetailView(int b_no) throws Exception;
 	
 	//게시글 조회수 증가
 	public void PhotoBoardHit(int b_no) throws Exception;

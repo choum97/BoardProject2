@@ -13,10 +13,10 @@
 	<c:if test="${member == null}">
 		<a href="loginView">로그인</a> <br>
 		<a href="SignUpMemberView">회원가입</a><br>
-		<a href="PhotoBoardView">게시판</a>
+		<a href="PhotoBoardListView">게시판</a>
 	</c:if>
 	<c:if test="${member != null}">
-		<a href="PhotoBoardView">게시판</a>
+		<a href="PhotoBoardListView">게시판</a>
 		<a href="logout">로그아웃</a>
 	</c:if>
 	

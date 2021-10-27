@@ -1,10 +1,13 @@
 package com.spring.ex.controller;
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,19 +23,20 @@ public class PhotoBoardController {
 	@Inject
 	private PhotoBoardService service;
 	
-	//여행패키지 출력
-	@RequestMapping(value = "/PhotoBoardView", method = RequestMethod.GET)
-	public String PhotoBoardView(Model model, HttpServletRequest request) throws Exception {
+	String Path = "C:\\Users\\zeeko\\eclipse-workspace\\BoardProject2\\src\\main\\webapp\\resources\\images\\photoBoard/";
+	
+	//게시판 페이지 이동 및 게시판 목록 출력
+	@RequestMapping(value = "/PhotoBoardListView", method = RequestMethod.GET)
+	public String PhotoBoardList(Model model, HttpServletRequest request) throws Exception {
 		
 		int totalCount = service.PhotoBoardTotalCount();
 		int page = request.getParameter("page") == null ? 1 : Integer.parseInt(request.getParameter("page"));
-		System.out.println(totalCount);
 		
 		PagingVO paging = new PagingVO();
 		paging.setPageNo(page);
 		paging.setPageSize(9);
 		paging.setTotalCount(totalCount);
-		page = (page - 1) * 10;
+		page = (page - 1) * 9;
 		
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("Page", page);
@@ -40,12 +44,61 @@ public class PhotoBoardController {
 		
 		
 		List<PhotoBoardVO> photoBoardList = service.PhotoBoardList(map);
-		System.out.println(photoBoardList);
 		model.addAttribute("photoBoardList", photoBoardList);
 		model.addAttribute("Paging", paging);
 		
 		return "photoBoard";
+	}
+	
+	
+	//게시글 조회 - 상세페이지 출력
+	@RequestMapping(value = "/PhotoBoardDetailView", method = RequestMethod.GET)
+	public String PhotoBoardDetailView(Model model, HttpServletRequest request)  throws Exception {
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
+		PhotoBoardVO photoBoardDetail = service.PhotoBoardDetailView(b_no);
+		service.PhotoBoardHit(b_no);
+		model.addAttribute("photoBoardDetail", photoBoardDetail);
+		model.addAttribute("b_userId", photoBoardDetail.getB_userId());
+		return "photoBoardDetail";
+	}
+	
+	//게시글 삭제
+	@RequestMapping(value = "/PhotoBoardDelete")
+	public void PhotoBoardDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//String Path = request.getSession().getServletContext().getRealPath("resources/images/photoBoard/");
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
+		String pfileName = service.PhotoBoardFileName(b_no);// 삭제할 파일 이름 가져오기
 		
+        File fileModifyDelete = new File(Path + pfileName); //삭제할 파일 경로
+        
+		if (fileModifyDelete.exists()) {
+			if (fileModifyDelete.delete()) {
+				System.out.println("파일삭제 성공");
+			} else {
+				System.out.println("파일삭제 실패");
+			}
+		} else {
+			System.out.println("파일이 존재하지 않습니다.");
+		}
+
+		
+		int result = service.PhotoBoardDelete(b_no); //DB에서 삭제
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if(1 == result) {
+			out.println("<script>");
+			out.println("alert('삭제 성공.');");
+			out.println("location.href='PhotoBoardListView';");
+			out.println("</script>");
+			out.close();
+		} else {
+			System.out.println("삭제 실패");
+			out.println("<script>");
+			out.println("alert('삭제 실패.');");
+			out.println("location.reload();");
+			out.println("</script>");
+			out.close();
+		}
 	}
 	
 }

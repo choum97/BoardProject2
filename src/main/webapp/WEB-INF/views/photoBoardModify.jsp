@@ -21,7 +21,7 @@
 		/ <a href="logout">로그아웃</a> 
 	</c:if> 
  	<c:if test="${b_userId eq member.getM_userId()}">
-		/ <a href="#">수정</a>
+		/ <a href="#">수정하기</a>
 		/ <a href="PhotoBoardDelete?b_no=${photoBoardDetail.b_no}">삭제</a> 
 	</c:if> 
 	<hr>
