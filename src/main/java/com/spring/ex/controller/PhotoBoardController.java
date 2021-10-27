@@ -101,4 +101,15 @@ public class PhotoBoardController {
 		}
 	}
 	
+	//게시글 수정
+	@RequestMapping(value = "/PhotoBoardModifyView", method = RequestMethod.GET)
+	public String PhotoBoardModifylView(Model model, HttpServletRequest request)  throws Exception {
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
+		PhotoBoardVO photoBoardDetail = service.PhotoBoardDetailView(b_no);
+		
+		model.addAttribute("photoBoardDetail", photoBoardDetail);
+		model.addAttribute("b_userId", photoBoardDetail.getB_userId());
+		return "photoBoardModify";
+	}
+	
 }
