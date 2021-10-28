@@ -26,7 +26,6 @@ public class PhotoBoardController {
 	private PhotoBoardService service;
 	
 	String Path = "C:\\Users\\zeeko\\eclipse-workspace\\BoardProject2\\src\\main\\webapp\\resources\\images\\photoBoard/";
-	
 	//게시판 페이지 이동 및 게시판 목록 출력
 	@RequestMapping(value = "/PhotoBoardListView", method = RequestMethod.GET)
 	public String PhotoBoardList(Model model, HttpServletRequest request) throws Exception {
@@ -65,7 +64,6 @@ public class PhotoBoardController {
 	//게시글 삭제
 	@RequestMapping(value = "/PhotoBoardDelete")
 	public void PhotoBoardDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//String Path = request.getSession().getServletContext().getRealPath("resources/images/photoBoard/");
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
 		String pfileName = service.PhotoBoardFileName(b_no);// 삭제할 파일 이름 가져오기
 		
@@ -118,7 +116,7 @@ public class PhotoBoardController {
 		if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
 			new File(Path + request.getParameter("imgFile")).delete();
 			String fileName = UploadFileUtils.fileUpload(Path, file.getOriginalFilename(), file.getBytes());
-	  
+
 			vo.setB_file_name(fileName);
 		}
 		else {
