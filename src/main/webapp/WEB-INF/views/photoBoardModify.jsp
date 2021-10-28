@@ -24,7 +24,7 @@
 	<hr>
 	
 	<div class="container">
-		<form action="photoBoardModify" method="POST" enctype="multipart/form-data">
+		<form action="PhotoBoardModify" method="POST" enctype="multipart/form-data">
 			<div>
 				<input type="hidden" id="b_no" name="b_no" value="${photoBoardDetail.b_no}" />
 				<div align="right">
@@ -76,6 +76,7 @@
 				reader.readAsDataURL(this.files[0]);
 			}
 		});
+		
 	</script>
 	
 </body>

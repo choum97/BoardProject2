@@ -30,7 +30,6 @@ public class PhotoBoardController {
 	//게시판 페이지 이동 및 게시판 목록 출력
 	@RequestMapping(value = "/PhotoBoardListView", method = RequestMethod.GET)
 	public String PhotoBoardList(Model model, HttpServletRequest request) throws Exception {
-		
 		int totalCount = service.PhotoBoardTotalCount();
 		int page = request.getParameter("page") == null ? 1 : Integer.parseInt(request.getParameter("page"));
 		
@@ -43,7 +42,6 @@ public class PhotoBoardController {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("Page", page);
 		map.put("PageSize", paging.getPageSize());
-		
 		
 		List<PhotoBoardVO> photoBoardList = service.PhotoBoardList(map);
 		model.addAttribute("photoBoardList", photoBoardList);
@@ -103,7 +101,7 @@ public class PhotoBoardController {
 		}
 	}
 	
-	//게시글 수정
+	//게시글 수정 페이지 이동
 	@RequestMapping(value = "/PhotoBoardModifyView", method = RequestMethod.GET)
 	public String PhotoBoardModifylView(Model model, HttpServletRequest request)  throws Exception {
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
@@ -114,16 +112,13 @@ public class PhotoBoardController {
 	}
 	
 	//게시글 수정
-	@RequestMapping(value = "/photoBoardModify", method = RequestMethod.POST)
+	@RequestMapping(value = "/PhotoBoardModify", method = RequestMethod.POST)
 	public String PhotoBoardModify(PhotoBoardVO vo, MultipartFile file, HttpServletRequest request) throws Exception {
 		
 		if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
 			new File(Path + request.getParameter("imgFile")).delete();
 			String fileName = UploadFileUtils.fileUpload(Path, file.getOriginalFilename(), file.getBytes());
 	  
-			File fileModifyDelete = new File(Path + vo.getB_file_name()); //기존 파일 삭제
-			fileModifyDelete.delete();
-			
 			vo.setB_file_name(fileName);
 		}
 		else {
