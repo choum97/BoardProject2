@@ -112,11 +112,10 @@ public class PhotoBoardController {
 	//게시글 수정
 	@RequestMapping(value = "/PhotoBoardModify", method = RequestMethod.POST)
 	public String PhotoBoardModify(PhotoBoardVO vo, MultipartFile file, HttpServletRequest request) throws Exception {
-		
 		if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
 			new File(Path + request.getParameter("imgFile")).delete();
 			String fileName = UploadFileUtils.fileUpload(Path, file.getOriginalFilename(), file.getBytes());
-
+			
 			vo.setB_file_name(fileName);
 		}
 		else {
