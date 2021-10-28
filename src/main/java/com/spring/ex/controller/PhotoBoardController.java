@@ -13,8 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.ex.service.PhotoBoardService;
+import com.spring.ex.util.UploadFileUtils;
 import com.spring.ex.vo.PagingVO;
 import com.spring.ex.vo.PhotoBoardVO;
 
@@ -108,8 +110,27 @@ public class PhotoBoardController {
 		PhotoBoardVO photoBoardDetail = service.PhotoBoardDetailView(b_no);
 		
 		model.addAttribute("photoBoardDetail", photoBoardDetail);
-		model.addAttribute("b_userId", photoBoardDetail.getB_userId());
 		return "photoBoardModify";
 	}
 	
+	//게시글 수정
+	@RequestMapping(value = "/photoBoardModify", method = RequestMethod.POST)
+	public String PhotoBoardModify(PhotoBoardVO vo, MultipartFile file, HttpServletRequest request) throws Exception {
+		
+		if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
+			new File(Path + request.getParameter("imgFile")).delete();
+			String fileName = UploadFileUtils.fileUpload(Path, file.getOriginalFilename(), file.getBytes());
+	  
+			File fileModifyDelete = new File(Path + vo.getB_file_name()); //기존 파일 삭제
+			fileModifyDelete.delete();
+			
+			vo.setB_file_name(fileName);
+		}
+		else {
+			vo.setB_file_name(request.getParameter("imgFile"));
+		}
+		service.PhotoBoardModify(vo);
+		
+		return "redirect:PhotoBoardListView";
+	}
 }

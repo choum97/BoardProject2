@@ -17,7 +17,7 @@ public class PhotoBoardVO {
 	
 	private int b_no;
 	private String b_userId;
-	private String b_title;
+	private String b_title; 
 	private String b_content;
 	private int b_hit;
 	private int b_good;

@@ -25,7 +25,7 @@
 	
 	<!-- 게시글 수정 -->
     <update id="PhotoBoardModify" parameterType="PhotoBoardVO">
-    	UPDATE t_sbp_board SET Title=#{title}, content=#{content}, s_file_name = #{s_file_name} WHERE prid = #{prid}
+    	UPDATE t_sbp_board SET b_title = #{b_title}, b_content = #{b_content}, b_file_name = #{b_file_name} WHERE b_no = #{b_no}
     </update>
     
    	<!-- 게시글 삭제  -->
