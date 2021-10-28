@@ -24,19 +24,19 @@ public class MemberController {
 	
 	//메인 페이지 이동
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home() {
 		return "home";
 	}
 	
 	//로그인 페이지 이동
 	@RequestMapping(value = "/loginView", method = RequestMethod.GET)
-	public String LoginView(Model model) throws Exception {
+	public String LoginView() throws Exception {
 		return "login";
 	}
 	
 	//회원가입 페이지 이동
 	@RequestMapping(value = "/SignUpMemberView", method = RequestMethod.GET)
-	public String SignUpMemberView(Model model) throws Exception {
+	public String SignUpMemberView() throws Exception {
 		return "join";
 	}
 	

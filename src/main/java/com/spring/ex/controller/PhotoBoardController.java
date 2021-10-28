@@ -125,4 +125,25 @@ public class PhotoBoardController {
 		
 		return "redirect:PhotoBoardListView";
 	}
+	
+	//게시글 등록 페이지 이동
+	@RequestMapping(value = "/PhotoBoardWriteView", method = RequestMethod.GET)
+	public String PhotoBoardWriteView() {
+		return "photoBoardWrite";
+	}
+	
+	//게시글 등록
+	@RequestMapping(value = "/PhotoBoardWrite", method = RequestMethod.POST)
+	public String PhotoBoardWrite(PhotoBoardVO vo, MultipartFile file, HttpServletRequest request) throws Exception {
+		String fileName = null;
+		
+		if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
+			fileName =  UploadFileUtils.fileUpload(Path, file.getOriginalFilename(), file.getBytes());	
+		}
+
+		vo.setB_file_name(fileName);
+		service.PhotoBoardWrite(vo);
+		
+		return "redirect:PhotoBoardListView";
+	}
 }

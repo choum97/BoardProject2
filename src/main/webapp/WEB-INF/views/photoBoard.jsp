@@ -16,7 +16,7 @@
 	</h1>
 	<a href="home">메인</a>
  	<c:if test="${member != null}">
-		/ <a href="#">게시글작성</a> 
+		/ <a href="PhotoBoardWriteView">게시글작성</a> 
 		/ <a href="logout">로그아웃</a>
 	</c:if> 
 	<hr>
