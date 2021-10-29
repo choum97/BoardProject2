@@ -28,7 +28,7 @@
 					<div>
 						<c:choose>
 							<c:when test="${photoBoardList.b_file_name ne null}">
-								<img src='<c:url value="/resources/images/photoBoard/${photoBoardList.b_file_name}"/>' alt="" width="300" height="200">
+								<img src='<c:url value="/resources/images/photoBoard/${photoBoardList.b_file_name}"/>' alt="" width="300" height="200"  onerror="javascript:setTimeout('location.reload()',1500); console.log('새로고침');">
 							</c:when>
 							<c:otherwise>
 								<img src='<c:url value="/resources/images/noImage.png"/>' width="300" height="200">
@@ -97,5 +97,6 @@
 			</ul>
 		</nav>
 	</div>
+	
 </body>
 </html>

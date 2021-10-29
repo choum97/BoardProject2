@@ -8,6 +8,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -111,11 +112,14 @@ public class PhotoBoardController {
 	
 	//게시글 수정
 	@RequestMapping(value = "/PhotoBoardModify", method = RequestMethod.POST)
-	public String PhotoBoardModify(PhotoBoardVO vo, MultipartFile file, HttpServletRequest request) throws Exception {
+	public String PhotoBoardModify(PhotoBoardVO vo, MultipartFile file, HttpServletRequest request, HttpSession session) throws Exception {
 		if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
 			new File(Path + request.getParameter("imgFile")).delete();
 			String fileName = UploadFileUtils.fileUpload(Path, file.getOriginalFilename(), file.getBytes());
 			
+		   //String path2 = session.getServletContext().getRealPath("/"); //이거로 하면 자동으로 새로고침은 됨
+		   //System.out.println("■path:::"+path2);
+
 			vo.setB_file_name(fileName);
 		}
 		else {

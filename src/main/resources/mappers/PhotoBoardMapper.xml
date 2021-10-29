@@ -17,9 +17,9 @@
 			#{b_userId},
 		    #{b_title},
 		    #{b_content}, 
-		    #{b_hit}, 
-		    #{b_good},
-		    #{b_bad}, 
+		    0, 
+		    0,
+		    0, 
 		    #{b_file_name})
 	</insert>
 	
