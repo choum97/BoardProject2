@@ -22,12 +22,6 @@ public class MemberController {
 	@Inject
 	private MemberService service;
 	
-	//메인 페이지 이동
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String home() {
-		return "home";
-	}
-	
 	//로그인 페이지 이동
 	@RequestMapping(value = "/loginView", method = RequestMethod.GET)
 	public String LoginView() throws Exception {
