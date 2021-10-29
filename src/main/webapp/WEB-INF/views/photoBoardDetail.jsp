@@ -11,20 +11,23 @@
 </head>
 
 <body>
-	<h1>
-		게시글 조회
-	</h1>
-	<a href="home">메인</a> / 
-	<a href="javascript:history.back();">뒤로가기</a> 
- 	
- 	<c:if test="${member != null}">
-		/ <a href="logout">로그아웃</a> 
-	</c:if> 
- 	<c:if test="${b_userId eq member.getM_userId()}">
-		/ <a href="PhotoBoardModifyView?b_no=${photoBoardDetail.b_no}">수정</a>
-		/ <a href="PhotoBoardDelete?b_no=${photoBoardDetail.b_no}">삭제</a> 
-	</c:if> 
+	<div class="container">
+		<h1>
+			게시글 조회
+		</h1>
+		<a href="home">메인</a> / 
+		<a href="javascript:history.back();">뒤로가기</a> 
+	 	
+	 	<c:if test="${member != null}">
+			/ <a href="logout">로그아웃</a> 
+		</c:if> 
+	 	<c:if test="${b_userId eq member.getM_userId()}">
+			/ <a href="PhotoBoardModifyView?b_no=${photoBoardDetail.b_no}">수정</a>
+			/ <a href="PhotoBoardDelete?b_no=${photoBoardDetail.b_no}">삭제</a> 
+		</c:if> 
+	</div>
 	<hr>
+	
 	<div class="container">
 		<div align="right">
 			<p>

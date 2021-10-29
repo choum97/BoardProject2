@@ -5,18 +5,21 @@
 <html>
 <head>
 	<title>Home</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
 <body>
-	
-
-	<form method="post">
-		<input type="text" name="m_userId" id="m_userId" placeholder="아이디" /><br>
-		<input type="password" name="m_pw" id="m_pw" placeholder="비밀번호" />
-		<input type="button" value="로그인"  id="submitBtn">
-	</form>
-	<a href="home">메인</a>
-	
+	<div class="container">
+		<h1>로그인</h1>
+		<a href="home">메인</a>
+		<hr>
+		<form method="post">
+			<input type="text" name="m_userId" id="m_userId" placeholder="아이디" /><br>
+			<input type="password" name="m_pw" id="m_pw" placeholder="비밀번호" />
+			<input type="button" value="로그인"  id="submitBtn">
+		</form>
+		
+	</div>
 	<script>
 		$(document).ready(function() {
 			$('#submitBtn').click(function() {

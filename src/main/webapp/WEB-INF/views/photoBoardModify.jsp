@@ -9,18 +9,23 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
-	<h1>
-		게시글 수정
-	</h1>
-	<a href="home">메인</a> / 
-	<a href="javascript:history.back();">뒤로가기</a> 
- 	
- 	<c:if test="${member != null}">
-		/ <a href="logout">로그아웃</a> 
-	</c:if> 
- 	<c:if test="${photoBoardDetail.b_userId ne member.getM_userId()}">
- 		<c:redirect url="home"/>
-	</c:if> 
+	<div class="container">
+		<h1>
+			게시글 수정
+		</h1>
+		<a href="home">메인</a> / 
+		<a href="javascript:history.back();">뒤로가기</a> 
+	 	
+	 	<c:if test="${member != null}">
+			/ <a href="logout">로그아웃</a> 
+		</c:if> 
+	 	<c:if test="${photoBoardDetail.b_userId ne member.getM_userId()}">
+	 		<c:redirect url="home"/>
+		</c:if>
+		<c:if test="${member == null}">
+			<c:redirect url="loginView"/>
+		</c:if>  
+	</div>
 	<hr>
 	
 	<div class="container">

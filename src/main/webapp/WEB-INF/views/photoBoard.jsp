@@ -11,14 +11,16 @@
 </head>
 
 <body>
-	<h1>
-		게시판 목록 
-	</h1>
-	<a href="home">메인</a>
- 	<c:if test="${member != null}">
-		/ <a href="PhotoBoardWriteView">게시글작성</a> 
-		/ <a href="logout">로그아웃</a>
-	</c:if> 
+	 <div class="container">
+		<h1>
+			게시판 목록 
+		</h1>
+		<a href="home">메인</a>
+	 	<c:if test="${member != null}">
+			/ <a href="PhotoBoardWriteView">게시글작성</a> 
+			/ <a href="logout">로그아웃</a>
+		</c:if> 
+	</div>
 	<hr>
     <div class="container" align="center">
 		<div id="content">

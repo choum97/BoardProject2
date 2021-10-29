@@ -4,22 +4,25 @@
 <html>
 <head>
 	<title>Home</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-	<c:if test="${member == null}">
-		<a href="loginView">로그인</a> <br>
-		<a href="SignUpMemberView">회원가입</a><br>
-		<a href="PhotoBoardListView">게시판</a>
-	</c:if>
-	<c:if test="${member != null}">
-		<a href="PhotoBoardListView">게시판</a>
-		<a href="logout">로그아웃</a>
-	</c:if>
+	<div class="container">
+		<h1>
+			Hello world!  
+		</h1>
 	
+		<c:if test="${member == null}">
+			<a href="loginView">로그인</a> <br>
+			<a href="SignUpMemberView">회원가입</a><br>
+			<a href="PhotoBoardListView">게시판</a>
+		</c:if>
+		<c:if test="${member != null}">
+			<a href="PhotoBoardListView">게시판</a>
+			<a href="logout">로그아웃</a>
+		</c:if>
+	</div>
+	<hr>
 	<%--
  	<c:if test="${member == null}">
 	
