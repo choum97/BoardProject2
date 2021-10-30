@@ -10,7 +10,6 @@ public class PhotoBoardVO {
 	 * 내용
 	 * 조회수
 	 * 좋아요
-	 * 싫어요
 	 * 서버 저장파일 이름
 	 * 작성일
 	 */
@@ -20,8 +19,7 @@ public class PhotoBoardVO {
 	private String b_title; 
 	private String b_content;
 	private int b_hit;
-	private int b_good;
-	private int b_bad;
+	private int b_like;
 	private String b_file_name;
 	private Date b_writing_date;
 	
@@ -55,17 +53,11 @@ public class PhotoBoardVO {
 	public void setB_hit(int b_hit) {
 		this.b_hit = b_hit;
 	}
-	public int getB_good() {
-		return b_good;
+	public int getB_like() {
+		return b_like;
 	}
-	public void setB_good(int b_good) {
-		this.b_good = b_good;
-	}
-	public int getB_bad() {
-		return b_bad;
-	}
-	public void setB_bad(int b_bad) {
-		this.b_bad = b_bad;
+	public void setB_like(int b_like) {
+		this.b_like = b_like;
 	}
 	public Date getB_writing_date() {
 		return b_writing_date;

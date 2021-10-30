@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.ex.HeartMapper">
+	
+	<!-- 게시글 좋아요 클릭 여부 -->
+	<select id="getBoardLikeCheck" resultType="int">
+		SELECT * FROM t_sbp_heart WHERE b_no = {b_no}
+	</select>
+	
+	<!-- 게시글 좋아요 증가 -->
+    <insert id="BoardLike" parameterType="int">
+    	INSERT INTO t_sbp_heart(b_no, m_userId) VALUES (#{b_no}, #{m_userId})
+    </insert>
+    <update id="PhotoBoardLikeUp" parameterType="int">
+    	UPDATE t_sbp_board SET b_like = b_like+1 WHERE b_no = #{b_no}
+    </update>
+    
+	<!-- 게시글 좋아요 삭제 -->
+	<delete id="BoardLikeDelete" parameterType="int">
+		DELETE FROM t_sbp_heart WHERE b_no = #{b_no} AND m_userId = #{m_userId}
+	</delete>
+    <update id="PhotoBoardLikeDown" parameterType="int">
+    	UPDATE t_sbp_board SET b_like = b_like-1 WHERE b_no = #{b_no}
+    </update>
+	
+</mapper>

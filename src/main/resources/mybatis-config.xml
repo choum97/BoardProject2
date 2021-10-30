@@ -5,5 +5,6 @@
 	<typeAliases>
 		<typeAlias type="com.spring.ex.vo.MemberVO" alias="MemberVO"/>
 		<typeAlias type="com.spring.ex.vo.PhotoBoardVO" alias="PhotoBoardVO"/>
+		<typeAlias type="com.spring.ex.vo.HeartVO" alias="HeartMapperVO"/>
 	</typeAliases>
 </configuration>
