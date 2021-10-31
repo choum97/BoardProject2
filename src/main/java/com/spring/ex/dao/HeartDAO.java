@@ -7,7 +7,7 @@ import com.spring.ex.vo.HeartVO;
 @Repository
 public interface HeartDAO {
 	//게시글 좋아요 클릭 여부
-	public int BoardLikeCheck(int checkLike) throws Exception;
+	public int BoardLikeCheck(String m_userId) throws Exception;
 	
 	//게시글 좋아요 증가
 	public int BoardLike(HeartVO vo) throws Exception;

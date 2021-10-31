@@ -5,7 +5,7 @@
 	
 	<!-- 게시글 좋아요 클릭 여부 -->
 	<select id="BoardLikeCheck" resultType="int">
-		SELECT * FROM t_sbp_heart WHERE b_no = {b_no}
+		SELECT * FROM t_sbp_heart WHERE m_userId = {m_userId}
 	</select>
 	
 	<!-- 게시글 좋아요 증가 

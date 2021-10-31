@@ -16,8 +16,8 @@ public class HeartDAOImpl implements HeartDAO {
 	
 	//게시글 좋아요 클릭 여부
 	@Override
-	public int BoardLikeCheck(int checkLike) throws Exception {
-		return sqlSession.selectOne(namespace + ".BoardLikeCheck", checkLike);
+	public int BoardLikeCheck(String m_userId) throws Exception {
+		return sqlSession.selectOne(namespace + ".BoardLikeCheck", m_userId);
 	}
 
 	//게시글 좋아요 증가 

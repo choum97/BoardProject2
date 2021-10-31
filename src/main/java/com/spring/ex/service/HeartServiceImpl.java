@@ -14,8 +14,8 @@ public class HeartServiceImpl implements HeartService {
 	
 	//게시글 좋아요 클릭 여부
 	@Override
-	public int BoardLikeCheck(int checkLike) throws Exception {
-		return dao.BoardLikeCheck(checkLike);
+	public int BoardLikeCheck(String m_userId) throws Exception {
+		return dao.BoardLikeCheck(m_userId);
 	}
 
 	//게시글 좋아요 증가 
