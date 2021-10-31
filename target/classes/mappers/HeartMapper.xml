@@ -4,23 +4,29 @@
 <mapper namespace="com.spring.ex.HeartMapper">
 	
 	<!-- 게시글 좋아요 클릭 여부 -->
-	<select id="getBoardLikeCheck" resultType="int">
+	<select id="BoardLikeCheck" resultType="int">
 		SELECT * FROM t_sbp_heart WHERE b_no = {b_no}
 	</select>
 	
-	<!-- 게시글 좋아요 증가 -->
+	<!-- 게시글 좋아요 증가 
+		 생성
+		 값 수정
+	-->
     <insert id="BoardLike" parameterType="int">
     	INSERT INTO t_sbp_heart(b_no, m_userId) VALUES (#{b_no}, #{m_userId})
     </insert>
-    <update id="PhotoBoardLikeUp" parameterType="int">
+    <update id="BoardLikeUp" parameterType="int">
     	UPDATE t_sbp_board SET b_like = b_like+1 WHERE b_no = #{b_no}
     </update>
     
-	<!-- 게시글 좋아요 삭제 -->
+	<!-- 게시글 좋아요 삭제 
+		 삭제
+		 값 수정
+	-->
 	<delete id="BoardLikeDelete" parameterType="int">
 		DELETE FROM t_sbp_heart WHERE b_no = #{b_no} AND m_userId = #{m_userId}
 	</delete>
-    <update id="PhotoBoardLikeDown" parameterType="int">
+    <update id="BoardLikeDown" parameterType="int">
     	UPDATE t_sbp_board SET b_like = b_like-1 WHERE b_no = #{b_no}
     </update>
 	

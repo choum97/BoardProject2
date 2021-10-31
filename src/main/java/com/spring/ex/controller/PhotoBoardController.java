@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.spring.ex.service.HeartService;
 import com.spring.ex.service.PhotoBoardService;
 import com.spring.ex.util.UploadFileUtils;
 import com.spring.ex.vo.PagingVO;
@@ -24,13 +25,14 @@ import com.spring.ex.vo.PhotoBoardVO;
 @Controller
 public class PhotoBoardController {
 	@Inject
-	private PhotoBoardService service;
+	private PhotoBoardService boardService;
+	private HeartService heartService;
 	
 	String Path = "C:\\Users\\zeeko\\eclipse-workspace\\BoardProject2\\src\\main\\webapp\\resources\\images\\photoBoard/";
 	//게시판 페이지 이동 및 게시판 목록 출력
 	@RequestMapping(value = "/PhotoBoardListView", method = RequestMethod.GET)
 	public String PhotoBoardList(Model model, HttpServletRequest request) throws Exception {
-		int totalCount = service.PhotoBoardTotalCount();
+		int totalCount = boardService.PhotoBoardTotalCount();
 		int page = request.getParameter("page") == null ? 1 : Integer.parseInt(request.getParameter("page"));
 		
 		PagingVO paging = new PagingVO();
@@ -43,7 +45,7 @@ public class PhotoBoardController {
 		map.put("Page", page);
 		map.put("PageSize", paging.getPageSize());
 		
-		List<PhotoBoardVO> photoBoardList = service.PhotoBoardList(map);
+		List<PhotoBoardVO> photoBoardList = boardService.PhotoBoardList(map);
 		model.addAttribute("photoBoardList", photoBoardList);
 		model.addAttribute("Paging", paging);
 		
@@ -55,8 +57,8 @@ public class PhotoBoardController {
 	@RequestMapping(value = "/PhotoBoardDetailView", method = RequestMethod.GET)
 	public String PhotoBoardDetailView(Model model, HttpServletRequest request)  throws Exception {
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
-		PhotoBoardVO photoBoardDetail = service.PhotoBoardDetailView(b_no);
-		service.PhotoBoardHit(b_no);
+		PhotoBoardVO photoBoardDetail = boardService.PhotoBoardDetailView(b_no);
+		boardService.PhotoBoardHit(b_no);
 		model.addAttribute("photoBoardDetail", photoBoardDetail);
 		model.addAttribute("b_userId", photoBoardDetail.getB_userId());
 		return "photoBoardDetail";
@@ -66,7 +68,7 @@ public class PhotoBoardController {
 	@RequestMapping(value = "/PhotoBoardDelete")
 	public void PhotoBoardDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
-		String pfileName = service.PhotoBoardFileName(b_no);// 삭제할 파일 이름 가져오기
+		String pfileName = boardService.PhotoBoardFileName(b_no);// 삭제할 파일 이름 가져오기
 		
         File fileModifyDelete = new File(Path + pfileName); //삭제할 파일 경로
         
@@ -81,7 +83,7 @@ public class PhotoBoardController {
 		}
 
 		
-		int result = service.PhotoBoardDelete(b_no); //DB에서 삭제
+		int result = boardService.PhotoBoardDelete(b_no); //DB에서 삭제
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		if(1 == result) {
@@ -104,7 +106,7 @@ public class PhotoBoardController {
 	@RequestMapping(value = "/PhotoBoardModifyView", method = RequestMethod.GET)
 	public String PhotoBoardModifylView(Model model, HttpServletRequest request)  throws Exception {
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
-		PhotoBoardVO photoBoardDetail = service.PhotoBoardDetailView(b_no);
+		PhotoBoardVO photoBoardDetail = boardService.PhotoBoardDetailView(b_no);
 		
 		model.addAttribute("photoBoardDetail", photoBoardDetail);
 		return "photoBoardModify";
@@ -125,7 +127,7 @@ public class PhotoBoardController {
 		else {
 			vo.setB_file_name(request.getParameter("imgFile"));
 		}
-		service.PhotoBoardModify(vo);
+		boardService.PhotoBoardModify(vo);
 		
 		return "redirect:PhotoBoardListView";
 	}
@@ -146,7 +148,7 @@ public class PhotoBoardController {
 		}
 
 		vo.setB_file_name(fileName);
-		service.PhotoBoardWrite(vo);
+		boardService.PhotoBoardWrite(vo);
 		
 		return "redirect:PhotoBoardListView";
 	}

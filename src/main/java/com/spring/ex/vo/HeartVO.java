@@ -7,6 +7,8 @@ public class HeartVO {
 	 * 회원 아이디
 	 */
 	private int h_no;
+	private int m_no;
+	private String m_userId;
 	public int getH_no() {
 		return h_no;
 	}
@@ -25,6 +27,5 @@ public class HeartVO {
 	public void setM_userId(String m_userId) {
 		this.m_userId = m_userId;
 	}
-	private int m_no;
-	private String m_userId;
+
 }
