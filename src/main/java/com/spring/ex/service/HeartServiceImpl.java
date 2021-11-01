@@ -1,5 +1,7 @@
 package com.spring.ex.service;
 
+import java.util.HashMap;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -14,8 +16,8 @@ public class HeartServiceImpl implements HeartService {
 	
 	//게시글 좋아요 클릭 여부
 	@Override
-	public int BoardLikeCheck(String m_userId) throws Exception {
-		return dao.BoardLikeCheck(m_userId);
+	public int BoardLikeCheck(HashMap<String, String> map) throws Exception {
+		return dao.BoardLikeCheck(map);
 	}
 
 	//게시글 좋아요 증가 
@@ -38,7 +40,7 @@ public class HeartServiceImpl implements HeartService {
 	}
 	//값 수정
 	@Override
-	public int BoardLikeDown(int b_no) throws Exception {
+	public int BoardLikeDown(String b_no) throws Exception {
 		return dao.BoardLikeDown(b_no);
 	}
 

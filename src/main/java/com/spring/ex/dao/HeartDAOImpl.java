@@ -1,5 +1,7 @@
 package com.spring.ex.dao;
 
+import java.util.HashMap;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -16,8 +18,8 @@ public class HeartDAOImpl implements HeartDAO {
 	
 	//게시글 좋아요 클릭 여부
 	@Override
-	public int BoardLikeCheck(String m_userId) throws Exception {
-		return sqlSession.selectOne(namespace + ".BoardLikeCheck", m_userId);
+	public int BoardLikeCheck(HashMap<String, String> map) throws Exception {
+		return sqlSession.selectOne(namespace + ".BoardLikeCheck", map);
 	}
 
 	//게시글 좋아요 증가 
@@ -40,7 +42,7 @@ public class HeartDAOImpl implements HeartDAO {
 	}
 	//값 수정
 	@Override
-	public int BoardLikeDown(int b_no) throws Exception {
+	public int BoardLikeDown(String b_no) throws Exception {
 		return sqlSession.update(namespace + ".BoardLikeDown", b_no);
 	}
 

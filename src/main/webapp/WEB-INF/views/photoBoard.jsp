@@ -40,7 +40,12 @@
 					<div>
 						<p align="right"><font size="1px"> 조회수 : ${photoBoardList.b_hit}</font></p>
 						<h3 style="font-size: 19px;">
-							<a href="PhotoBoardDetailView?b_no=${photoBoardList.b_no}"><c:out value="${fn:substring(photoBoardList.b_title, 0 ,20)}" /></a>
+						 	<c:if test="${member == null}">
+						 		<a href="PhotoBoardDetailView?b_no=${photoBoardList.b_no}"><c:out value="${fn:substring(photoBoardList.b_title, 0 ,20)}" /></a>
+							</c:if>
+						 	<c:if test="${member != null}">
+						 		<a href="PhotoBoardDetailView?b_no=${photoBoardList.b_no}&m_userId=${member.getM_userId()}"><c:out value="${fn:substring(photoBoardList.b_title, 0 ,20)}" /></a>
+							</c:if>
 						</h3>
 						<p><c:out value="${fn:substring(photoBoardList.b_content,0,20)}" /></p>
 						<ul class="tour-one__meta list-unstyled">

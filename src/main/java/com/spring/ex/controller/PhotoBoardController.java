@@ -14,21 +14,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.ex.service.HeartService;
 import com.spring.ex.service.PhotoBoardService;
 import com.spring.ex.util.UploadFileUtils;
 import com.spring.ex.vo.HeartVO;
-import com.spring.ex.vo.MemberVO;
 import com.spring.ex.vo.PagingVO;
 import com.spring.ex.vo.PhotoBoardVO;
+
+import oracle.net.aso.b;
 
 @Controller
 public class PhotoBoardController {
 	@Inject
 	private PhotoBoardService boardService;
+	@Inject
 	private HeartService heartService;
 	
 	String Path = "C:\\Users\\zeeko\\eclipse-workspace\\BoardProject2\\src\\main\\webapp\\resources\\images\\photoBoard/";
@@ -60,8 +61,21 @@ public class PhotoBoardController {
 	@RequestMapping(value = "/PhotoBoardDetailView", method = RequestMethod.GET)
 	public String PhotoBoardDetailView(Model model, HttpServletRequest request)  throws Exception {
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
+		String m_userId = request.getParameter("m_userId");
+		
 		PhotoBoardVO photoBoardDetail = boardService.PhotoBoardDetailView(b_no);
 		boardService.PhotoBoardHit(b_no);
+		
+		HashMap<String, String> checkMap = new HashMap<String, String>();
+		checkMap.put("b_no", request.getParameter("b_no"));
+		checkMap.put("m_userId", m_userId);
+		
+		if(m_userId != null) {
+			int res = heartService.BoardLikeCheck(checkMap);
+			model.addAttribute("boardLikeCheck", res);
+		} else {
+			model.addAttribute("boardLikeCheck", photoBoardDetail.getB_userId());
+		}
 		
 		model.addAttribute("photoBoardDetail", photoBoardDetail);
 		model.addAttribute("b_userId", photoBoardDetail.getB_userId());
@@ -157,24 +171,33 @@ public class PhotoBoardController {
 		return "redirect:PhotoBoardListView";
 	}
 	
-	//게시글 좋아요 클릭여부 - 회원
-	@RequestMapping(value = "/BoardLikeCheck", method = RequestMethod.GET)
-	public int BoardLikeCheck(String m_userId) throws Exception {
-		int result = heartService.BoardLikeCheck(m_userId);
-		return result;
-	}
-	
 	//게시글 좋아요 증가
 	@RequestMapping(value = "/BoardLikeUp", method = RequestMethod.GET)
-	public int BoardLikeUp(HeartVO vo) throws Exception {
-		int result = 0;
-		int resultBlikeNew = heartService.BoardLike(vo);
-		int resultBlikeUp = heartService.BoardLikeUp(vo.getB_no());
+	public String BoardLikeUp(HeartVO vo, HttpServletRequest request, Model model) throws Exception {
+		heartService.BoardLike(vo);
 		
-		if(resultBlikeNew == 1 && resultBlikeUp == 1) {
-			result = 1;
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
+		heartService.BoardLikeUp(b_no);		
+		
+		
+		String m_userId = request.getParameter("m_userId");
+		
+		PhotoBoardVO photoBoardDetail = boardService.PhotoBoardDetailView(b_no);
+		
+		HashMap<String, String> checkMap = new HashMap<String, String>();
+		checkMap.put("b_no", request.getParameter("b_no"));
+		checkMap.put("m_userId", m_userId);
+		
+		if(m_userId != null) {
+			int res = heartService.BoardLikeCheck(checkMap);
+			model.addAttribute("boardLikeCheck", res);
+		} else {
+			model.addAttribute("boardLikeCheck", photoBoardDetail.getB_userId());
 		}
-		return result;
+		
+		model.addAttribute("photoBoardDetail", photoBoardDetail);
+		model.addAttribute("b_userId", photoBoardDetail.getB_userId());
+		return "redirect:photoBoardDetail?b_no="+ b_no;
 	}
 	
 	//게시글 좋아요 삭제

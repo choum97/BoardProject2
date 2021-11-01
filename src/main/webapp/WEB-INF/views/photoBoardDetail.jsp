@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title></title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 
 </head>
 
@@ -31,9 +33,26 @@
 	<div class="container">
 		<div align="right">
 			<p>
-				<font size="1px">작성자  : ${photoBoardDetail.b_userId}</font>
-				<font size="1px">조회수  : ${photoBoardDetail.b_hit }</font>
-				<font size="1px">작성일  : ${photoBoardDetail.b_writing_date }</font>
+				<input type="text" id="b_no" value="${photoBoardDetail.b_no}">
+				<input type="text" id="m_userId" value="${member.getM_userId()}">
+				
+				<font size="1px">작성자  : ${photoBoardDetail.b_userId}</font>&nbsp;
+				<font size="1px">조회수  : ${photoBoardDetail.b_hit+1 }</font> &nbsp;
+				<font size="1px">작성일  : ${photoBoardDetail.b_writing_date }</font>&nbsp;
+				<div id="divReloadLayer">
+					<c:choose>
+						<c:when test="${member ne null && boardLikeCheck eq 1}"> 
+							<button id="" onclick=""> &#x1f497; ${photoBoardDetail.b_like}</button>
+						</c:when>
+						<c:when test="${member ne null && boardLikeCheck eq 0}">  
+							<a href="BoardLikeUp?b_no=${photoBoardDetail.b_no}&m_userId=${member.getM_userId()}">
+							<button>&#x2661; <div id="result">${photoBoardDetail.b_like}</div></button></a>
+						</c:when>
+						<c:otherwise> 
+							<button id="buttonNoLogin" onclick="buttonNoLogin_click();" >&#x2661; ${photoBoardDetail.b_like}</button>
+						 </c:otherwise>
+					</c:choose>
+				</div>
 			<p>
 		</div>
 		<div align="center">
@@ -48,5 +67,59 @@
 			<p><c:out escapeXml="false" value="${fn:replace(photoBoardDetail.b_content, crlf, '<br>')}"/></p>
 		</div>
 	</div>
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script>
+		function buttonNoLogin_click() {
+			swal({
+				title: "로그인",
+				text: "로그인이 되어야 하트를 누를 수 있습니다.",
+				icon: "warning",
+			});
+		}
+		
+		function buttonUp() {
+			
+			//count('plus')
+			//var b_no = $("#b_no").val();
+			//var m_userId = $("#m_userId").val();
+			//location.href = "BoardLikeUp";
+		}
+		/*
+		function buttonDown() {
+			
+			
+			location.href = "BoardLikeDown";
+			count('minus')
+			var b_no = $("#b_no").val();
+			var m_userId = $("#m_userId").val();
+		}
+		
+ 		function count(type)  {
+			  // 결과를 표시할 element
+			  const resultElement = document.getElementById('result');
+			  
+			  // 현재 화면에 표시된 값
+			  let number = resultElement.innerText;
+			  
+			  // 더하기/빼기
+			  if(type === 'plus') {
+				
+			    number = parseInt(number) + 1;
+			    reloadDivArea();
+			  }else if(type === 'minus')  {
+			    number = parseInt(number) - 1;
+			  }
+			  
+			  // 결과 출력
+			  resultElement.innerText = number;
+		}
+		
+		
+		 
+		function reloadDivArea() {
+		    $('#divReloadLayer').load(location.href+' #divReloadLayer');
+		}*/
+
+	</script>
 </body>
 </html>

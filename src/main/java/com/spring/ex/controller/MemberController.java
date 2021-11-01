@@ -47,7 +47,7 @@ public class MemberController {
 		
 		if (member != null) {
 			session.setAttribute("member", member);
-			System.out.println(member.getM_userId());
+			//System.out.println(member.getM_userId());
 			service.LoginDateRenewal(vo);
 			result = 1;
 		}

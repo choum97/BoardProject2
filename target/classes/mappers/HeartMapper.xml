@@ -5,14 +5,15 @@
 	
 	<!-- 게시글 좋아요 클릭 여부 -->
 	<select id="BoardLikeCheck" resultType="int">
-		SELECT * FROM t_sbp_heart WHERE m_userId = {m_userId}
+		SELECT COUNT(*) FROM t_sbp_heart WHERE b_no = #{b_no} AND m_userId = #{m_userId}
 	</select>
 	
 	<!-- 게시글 좋아요 증가 
 		 생성
 		 값 수정
 	-->
-    <insert id="BoardLike" parameterType="int">
+    <insert id="BoardLike" useGeneratedKeys="true"
+    keyProperty="h_no">
     	INSERT INTO t_sbp_heart(b_no, m_userId) VALUES (#{b_no}, #{m_userId})
     </insert>
     <update id="BoardLikeUp" parameterType="int">

@@ -1,5 +1,7 @@
 package com.spring.ex.dao;
 
+import java.util.HashMap;
+
 import org.springframework.stereotype.Repository;
 
 import com.spring.ex.vo.HeartVO;
@@ -7,7 +9,7 @@ import com.spring.ex.vo.HeartVO;
 @Repository
 public interface HeartDAO {
 	//게시글 좋아요 클릭 여부
-	public int BoardLikeCheck(String m_userId) throws Exception;
+	public int BoardLikeCheck(HashMap<String, String> map) throws Exception;
 	
 	//게시글 좋아요 증가
 	public int BoardLike(HeartVO vo) throws Exception;
@@ -15,5 +17,5 @@ public interface HeartDAO {
 	
 	//게시글 좋아요 삭제 
 	public int BoardLikeDelete(HeartVO vo) throws Exception;
-	public int BoardLikeDown(int b_no) throws Exception;
+	public int BoardLikeDown(String b_no) throws Exception;
 }
