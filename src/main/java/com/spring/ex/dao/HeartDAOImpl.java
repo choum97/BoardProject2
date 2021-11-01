@@ -42,7 +42,7 @@ public class HeartDAOImpl implements HeartDAO {
 	}
 	//값 수정
 	@Override
-	public int BoardLikeDown(String b_no) throws Exception {
+	public int BoardLikeDown(int b_no) throws Exception {
 		return sqlSession.update(namespace + ".BoardLikeDown", b_no);
 	}
 

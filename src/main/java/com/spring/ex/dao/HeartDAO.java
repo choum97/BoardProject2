@@ -17,5 +17,5 @@ public interface HeartDAO {
 	
 	//게시글 좋아요 삭제 
 	public int BoardLikeDelete(HeartVO vo) throws Exception;
-	public int BoardLikeDown(String b_no) throws Exception;
+	public int BoardLikeDown(int b_no) throws Exception;
 }
