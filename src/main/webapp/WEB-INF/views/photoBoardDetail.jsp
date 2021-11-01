@@ -12,7 +12,7 @@
 
 </head>
 
-<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
+<body onload="noBack();"  onpageshow="if(event.persisted) noBack();" onunload="">
 	<div class="container">
 		<h1>
 			게시글 조회
@@ -37,21 +37,19 @@
 				<font size="1px">작성자  : ${photoBoardDetail.b_userId}</font>&nbsp;
 				<font size="1px">조회수  : ${photoBoardDetail.b_hit+1 }</font> &nbsp;
 				<font size="1px">작성일  : ${photoBoardDetail.b_writing_date }</font>&nbsp;
-				<div id="divReloadLayer">
-					<c:choose>
-						<c:when test="${member ne null && boardLikeCheck eq 1}"> 
-							<a href="BoardLikeDown?b_no=${photoBoardDetail.b_no}&m_userId=${member.getM_userId()}">
-							<button> &#x1f497; ${photoBoardDetail.b_like}</button></a>
-						</c:when>
-						<c:when test="${member ne null && boardLikeCheck ne 1}">  
-							<a href="BoardLikeUp?b_no=${photoBoardDetail.b_no}&m_userId=${member.getM_userId()}">
-							<button>&#x2661; <div id="result">${photoBoardDetail.b_like}</div></button></a>
-						</c:when>
-						<c:otherwise> 
-							<button id="buttonNoLogin" onclick="buttonNoLogin_click();" >&#x2661; ${photoBoardDetail.b_like}</button>
-						 </c:otherwise>
-					</c:choose>
-				</div>
+				<c:choose>
+					<c:when test="${member ne null && boardLikeCheck eq 1}"> 
+						<a href="BoardLikeDown?b_no=${photoBoardDetail.b_no}&m_userId=${member.getM_userId()}">
+						<button> &#x1f497; ${photoBoardDetail.b_like}</button></a>
+					</c:when>
+					<c:when test="${member ne null && boardLikeCheck ne 1}">  
+						<a href="BoardLikeUp?b_no=${photoBoardDetail.b_no}&m_userId=${member.getM_userId()}">
+						<button>&#x2661; ${photoBoardDetail.b_like}</button></a>
+					</c:when>
+					<c:otherwise> 
+						<button id="buttonNoLogin" onclick="buttonNoLogin_click();" >&#x2661; ${photoBoardDetail.b_like}</button>
+					 </c:otherwise>
+				</c:choose>
 			<p>
 		</div>
 		<div align="center">
@@ -66,7 +64,6 @@
 			<p><c:out escapeXml="false" value="${fn:replace(photoBoardDetail.b_content, crlf, '<br>')}"/></p>
 		</div>
 	</div>
-	
 	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 	<script>
 		function buttonNoLogin_click() {
