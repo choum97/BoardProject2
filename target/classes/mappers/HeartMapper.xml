@@ -24,7 +24,7 @@
 		 삭제
 		 값 수정
 	-->
-	<delete id="BoardLikeDelete" parameterType="int">
+	<delete id="BoardLikeDelete" parameterType="java.util.HashMap">
 		DELETE FROM t_sbp_heart WHERE b_no = #{b_no} AND m_userId = #{m_userId}
 	</delete>
     <update id="BoardLikeDown" parameterType="int">

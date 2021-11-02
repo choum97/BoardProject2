@@ -23,7 +23,6 @@ import com.spring.ex.vo.HeartVO;
 import com.spring.ex.vo.PagingVO;
 import com.spring.ex.vo.PhotoBoardVO;
 
-import oracle.net.aso.b;
 
 @Controller
 public class PhotoBoardController {
@@ -197,19 +196,36 @@ public class PhotoBoardController {
 		
 		model.addAttribute("photoBoardDetail", photoBoardDetail);
 		model.addAttribute("b_userId", photoBoardDetail.getB_userId());
-		return "redirect:photoBoardDetail?b_no="+ b_no;
+		
+		return "photoBoardDetail";
 	}
 	
 	//게시글 좋아요 삭제
 	@RequestMapping(value = "/BoardLikeDown", method = RequestMethod.GET)
-	public int BoardLikeDown(HeartVO vo) throws Exception {
-		int result = 0;
-		int resultBlikeDel = heartService.BoardLikeDelete(vo);
-		int resultBlikeDown = heartService.BoardLikeDown(vo.getB_no());
+	public String BoardLikeDown(HeartVO vo, HttpServletRequest request, Model model) throws Exception {
+		heartService.BoardLikeDelete(vo);
 		
-		if(resultBlikeDel == 1 && resultBlikeDown == 1) {
-			result = 1;
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
+		heartService.BoardLikeDown(b_no);
+		
+		String m_userId = request.getParameter("m_userId");
+		
+		PhotoBoardVO photoBoardDetail = boardService.PhotoBoardDetailView(b_no);
+		
+		HashMap<String, String> checkMap = new HashMap<String, String>();
+		checkMap.put("b_no", request.getParameter("b_no"));
+		checkMap.put("m_userId", m_userId);
+		
+		if(m_userId != null) {
+			int res = heartService.BoardLikeCheck(checkMap);
+			model.addAttribute("boardLikeCheck", res);
+		} else {
+			model.addAttribute("boardLikeCheck", photoBoardDetail.getB_userId());
 		}
-		return result;
+		
+		model.addAttribute("photoBoardDetail", photoBoardDetail);
+		model.addAttribute("b_userId", photoBoardDetail.getB_userId());
+		
+		return "photoBoardDetail";
 	}
 }

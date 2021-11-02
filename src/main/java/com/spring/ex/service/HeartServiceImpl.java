@@ -40,7 +40,7 @@ public class HeartServiceImpl implements HeartService {
 	}
 	//값 수정
 	@Override
-	public int BoardLikeDown(String b_no) throws Exception {
+	public int BoardLikeDown(int b_no) throws Exception {
 		return dao.BoardLikeDown(b_no);
 	}
 
